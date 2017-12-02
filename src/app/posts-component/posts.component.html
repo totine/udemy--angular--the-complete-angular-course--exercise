@@ -1,3 +1,7 @@
-<p>
-  posts-component works!
-</p>
+<ul class="list-group">
+  <li
+    *ngFor="let post of posts"
+    class="list-group-item">
+    {{ post.title }}
+  </li>
+</ul>
