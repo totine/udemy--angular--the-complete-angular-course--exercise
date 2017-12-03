@@ -5,6 +5,9 @@
   <li
     *ngFor="let post of posts"
     class="list-group-item">
+    <button
+      (click)="updatePost(post)"
+      class="btn btn-default btn-sm">Update</button>
     {{ post.title }}
   </li>
 </ul>
