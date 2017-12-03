@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {PostService} from "../services/post.service";
-import {Response} from "@angular/http";
 import {AppError} from "../common/app-error";
 import {NotFoundError} from "../common/not-found-error";
+import {BadInput} from "../common/bad-input";
+import {Response} from "@angular/http";
 
 @Component({
   selector: 'posts-component',
@@ -38,13 +39,13 @@ export class PostsComponent implements OnInit {
 
     this.service.createPost(post)
       .subscribe(
-        response => {
-          post['id'] = response.json().id;
+        (response: Response) => {
+          post['id'] = response.json();
           this.posts.splice(0, 0, post);
         },
-        (error: Response) => {
-          if (error.status === 400) {
-            // this.form.setErrors(error.json());
+        (error: AppError) => {
+          if (error instanceof BadInput) {
+              // form.setErrors(error.errorValue);
           }
           else {
             alert('An unexpected error occurred!');
