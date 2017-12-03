@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { PostsComponent } from './posts-component/posts.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
+import {PostService} from "./services/post.service";
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import {HttpModule} from "@angular/http";
     ReactiveFormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [PostService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
