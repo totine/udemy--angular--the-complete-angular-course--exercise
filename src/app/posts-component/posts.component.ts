@@ -3,7 +3,6 @@ import { PostService } from "../services/post.service";
 import { AppError } from "../common/app-error";
 import { NotFoundError } from "../common/not-found-error";
 import { BadInput } from "../common/bad-input";
-import { Response } from "@angular/http";
 
 @Component({
   selector: 'posts-component',
@@ -23,10 +22,7 @@ export class PostsComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getAll()
-      .subscribe(
-        (response: Response) => {
-          this.posts = response.json();
-        });
+      .subscribe(posts => this.posts = posts);
   }
 
   createPost(input: HTMLInputElement) {
@@ -34,9 +30,8 @@ export class PostsComponent implements OnInit {
     input.value = '';
 
     this.service.create(post)
-      .subscribe(
-        (response: Response) => {
-          post['id'] = response.json().id;
+      .subscribe(newPost => {
+          post['id'] = newPost.id;
           this.posts.splice(0, 0, post);
         },
         (error: AppError) => {
@@ -50,15 +45,15 @@ export class PostsComponent implements OnInit {
   updatePost(post) {
     this.service.update(post)
       .subscribe(
-        response => {
-          console.log(response)
+        updatedPost => {
+          console.log(updatedPost)
         });
   }
 
   deletePost(post) {
     this.service.delete(post.id)
       .subscribe(
-        response => {
+        () => {
           let index = this.posts.indexOf(post);
           this.posts.splice(index, 1)
         },
