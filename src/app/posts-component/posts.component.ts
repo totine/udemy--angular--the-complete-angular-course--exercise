@@ -13,7 +13,14 @@ import { BadInput } from "../common/bad-input";
 
   export class PostsComponent implements OnInit {
 
+  posts: any[];
+
   constructor(private service: PostService) {
+  }
+
+  ngOnInit(): void {
+    this.service.getAll()
+      .subscribe(posts => this.posts = posts);
   }
 
   createPost(input: HTMLInputElement) {
@@ -34,13 +41,6 @@ import { BadInput } from "../common/bad-input";
           }
           else throw error;
       });
-  }
-
-  posts: any[];
-
-  ngOnInit(): void {
-    this.service.getAll()
-      .subscribe(posts => this.posts = posts);
   }
 
   updatePost(post) {
