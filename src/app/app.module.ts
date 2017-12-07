@@ -1,4 +1,4 @@
-// import { AuthHttp, AUTH_PROVIDERS, provideAuth, AuthConfig } from 'angular2-jwt/angular2-jwt';
+import { AuthHttp, AUTH_PROVIDERS, provideAuth, AuthConfig } from 'angular2-jwt';
 
 import { PostService } from "./services/post.service";
 import { GithubFollowersService } from "./services/github-followers.service";
